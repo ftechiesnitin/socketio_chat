@@ -18,7 +18,7 @@ var chat=app.controller('ChatController',function($stateParams,socket,$sanitize,
   	socket.on('connect',function(){
   	  
   	  connected = true
-  	 
+  	 console.log('connected');
   	  //Add user
   	  socket.emit('add user', $stateParams.nickname);
 
