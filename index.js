@@ -23,6 +23,7 @@ io.on('connection', function (socket) {
   console.log('User Connected');
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
+    console.log(data);
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: socket.username,
@@ -32,6 +33,7 @@ io.on('connection', function (socket) {
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function (username) {
+    console.log(username);
     // we store the username in the socket session for this client
     socket.username = username;
     // add the client's username to the global list
