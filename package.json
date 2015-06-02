@@ -1,0 +1,19 @@
+{
+  "name": "socketio_chat",
+  "version": "1.0.0",
+  "description": "Socket IO chat with ionic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ftechiesnitin/socketio_chat.git"
+  },
+  "author": "NOS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ftechiesnitin/socketio_chat/issues"
+  },
+  "homepage": "https://github.com/ftechiesnitin/socketio_chat"
+}
