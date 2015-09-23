@@ -18,7 +18,7 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 	socket.on('private'+$stateParams.username, function (data) {
   		console.log(data);
   		if(data.message&&data.username){
-   			addMessageToList(data.username,true,data.message)
+   			addMessageToList(data.nickname,true,data.message)
    		}
   	});
 //   	socket.on('connect',function(){
@@ -70,6 +70,7 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
   	$scope.sendMessage=function(){
   		var data ={
   			message: this.message,
+  			nickname: $stateParams.nickname,
   			username: $stateParams.username
   		}
   		socket.emit('new message', data)

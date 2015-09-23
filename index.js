@@ -30,8 +30,9 @@ io.on('connection', function (socket) {
     console.log(data);
 
     // we tell the client to execute 'new message'
-    socket.broadcast.emit('private'+data.username, {
+    socket.broadcast.emit('private'+data.nickname, {
       username: data.username,
+      nickname: data.nickname,
       message: data.message
     });
 
