@@ -7,7 +7,7 @@ var chat=app.controller('UserlistController',function($scope,$state,$stateParams
 
 	socket.on('connect',function(){
 		//Add user
-  		socket.emit('add user', $stateParams.nickname);
+  		socket.emit('add user', $stateParams.username);
   		// On login display welcome message
   	  	socket.on('login', function (data) {
   	  		console.log('htl');
@@ -26,6 +26,6 @@ var chat=app.controller('UserlistController',function($scope,$state,$stateParams
 
 	$scope.gotoChat = function(username){
 		console.log(username);
-		$state.go('chat',{nickname:username})
+		$state.go('chat',{username: $stateParams.username,nickname:username})
 	};
 });

@@ -6,7 +6,7 @@
             var nickname=$sanitize(self.nickname)
             if(nickname)
             {
-                $state.go('user_list',{nickname:nickname})
+                $state.go('user_list',{username:nickname})
             }
         }
     });

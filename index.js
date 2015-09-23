@@ -28,6 +28,13 @@ io.on('connection', function (socket) {
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     console.log(data);
+
+    // we tell the client to execute 'new message'
+    socket.broadcast.emit('private'+data.username, {
+      username: data.username,
+      message: data.message
+    });
+
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: socket.username,

@@ -15,8 +15,8 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 	 //initializing messages array
 	self.messages = []
 
-  	/*socket.on('connect',function(){
-  		// /socket.emit('new_user', {username: $stateParams.nickname});
+  	socket.on('connect',function(){
+  		/*// /socket.emit('new_user', {username: $stateParams.nickname});
   		connected = true
   	 	console.log('connected');
   		//Add user
@@ -28,16 +28,17 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 	    	self.connected = true
 	    	self.number_message= message_string(data.numUsers)
 	  	});
-
+*/
 	  	// Whenever the server emits 'new message', update the chat body
-	  	socket.on('new message', function (data) {
-	  		if(data.message&&data.username){
+	  	socket.on('private'+$stateParams.username, function (data) {
+	  		console.log(data);
+	  		/*if(data.message&&data.username){
 	   			addMessageToList(data.username,true,data.message)
-	   		}
+	   		}*/
 	  	});
 
 		// Whenever the server emits 'user joined', log it in the chat body
-		socket.on('user joined', function (data) {
+		/*socket.on('user joined', function (data) {
 			addMessageToList("",false,data.username + " joined")
 	  		addMessageToList("",false,message_string(data.numUsers)) 
 	  	});
@@ -56,13 +57,17 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 	  	// Whenever the server emits 'stop typing', kill the typing message
 	  	socket.on('stop typing', function (data) {
 	    	removeChatTyping(data.username);
-	  	});	
-  	})*/
+	  	});	*/
+  	})
 
   	//function called when user hits the send button
   	$scope.sendMessage=function(){
   		console.log(this.message);
-  		socket.emit('new message/:'+$stateParams.nickname, self.message)
+  		var data ={
+  			message: this.message,
+  			username: $stateParams.nickname
+  		}
+  		socket.emit('new message', data)
   		addMessageToList($stateParams.nickname,true,self.message)
   		/*socket.emit('stop typing');
   		self.message = ""*/

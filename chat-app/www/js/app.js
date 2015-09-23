@@ -20,11 +20,11 @@
 
       $stateProvider
       .state('chat', {
-        url: "/chat/:nickname",
+        url: "/chat/:username/:nickname",
         templateUrl: "templates/chat.html"
       })
       .state('user_list', {
-        url: "/user_list/:nickname",
+        url: "/user_list/:username",
         templateUrl: "templates/user_list.html"
       })
       .state('login', {
