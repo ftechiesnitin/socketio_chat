@@ -23,6 +23,10 @@
         url: "/chat/:nickname",
         templateUrl: "templates/chat.html"
       })
+      .state('user_list', {
+        url: "/user_list/:nickname",
+        templateUrl: "templates/user_list.html"
+      })
       .state('login', {
         url: "/login",
         templateUrl: "templates/login.html"
