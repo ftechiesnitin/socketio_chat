@@ -16,49 +16,47 @@ var chat=app.controller('ChatController',function($stateParams,socket,$sanitize,
 	self.messages=[]
 
   	socket.on('connect',function(){
-  	  
-  	  connected = true
-  	 console.log('connected');
-  	  //Add user
-  	  socket.emit('add user', $stateParams.nickname);
+  		// /socket.emit('new_user', {username: $stateParams.nickname});
+  		connected = true
+  	 	console.log('connected');
+  		//Add user
+  		socket.emit('add user', $stateParams.nickname);
 
-  	  // On login display welcome message
-  	  socket.on('login', function (data) {
-	    //Set the value of connected flag
-	    self.connected = true
-	    self.number_message= message_string(data.numUsers)
-	  	
-	  });
+  	  	// On login display welcome message
+  	  	socket.on('login', function (data) {
+	    	//Set the value of connected flag
+	    	self.connected = true
+	    	self.number_message= message_string(data.numUsers)
+	  	});
 
-	  // Whenever the server emits 'new message', update the chat body
-	  socket.on('new message', function (data) {
-	  	if(data.message&&data.username)
-	  	{
-	   		addMessageToList(data.username,true,data.message)
-	  	}
-	  });
+	  	// Whenever the server emits 'new message', update the chat body
+	  	socket.on('new message', function (data) {
+	  		if(data.message&&data.username){
+	   			addMessageToList(data.username,true,data.message)
+	   		}
+	  	});
 
-	  // Whenever the server emits 'user joined', log it in the chat body
-	  socket.on('user joined', function (data) {
-	  	addMessageToList("",false,data.username + " joined")
-	  	addMessageToList("",false,message_string(data.numUsers)) 
-	  });
+		// Whenever the server emits 'user joined', log it in the chat body
+		socket.on('user joined', function (data) {
+			addMessageToList("",false,data.username + " joined")
+	  		addMessageToList("",false,message_string(data.numUsers)) 
+	  	});
 
-	  // Whenever the server emits 'user left', log it in the chat body
-	  socket.on('user left', function (data) {
-	    addMessageToList("",false,data.username+" left")
-	    addMessageToList("",false,message_string(data.numUsers))
-	  });
+	  	// Whenever the server emits 'user left', log it in the chat body
+	  	socket.on('user left', function (data) {
+	    	addMessageToList("",false,data.username+" left")
+	    	addMessageToList("",false,message_string(data.numUsers))
+	  	});
 
-	  //Whenever the server emits 'typing', show the typing message
-	  socket.on('typing', function (data) {
-	    addChatTyping(data);
-	  });
+	  	//Whenever the server emits 'typing', show the typing message
+	  	socket.on('typing', function (data) {
+	    	addChatTyping(data);
+	  	});
 
-	  // Whenever the server emits 'stop typing', kill the typing message
-	  socket.on('stop typing', function (data) {
-	    removeChatTyping(data.username);
-	  });	
+	  	// Whenever the server emits 'stop typing', kill the typing message
+	  	socket.on('stop typing', function (data) {
+	    	removeChatTyping(data.username);
+	  	});	
   	})
 
   	//function called when user hits the send button

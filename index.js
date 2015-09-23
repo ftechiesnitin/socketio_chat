@@ -20,6 +20,10 @@ var numUsers = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
+  
+  /*socket.on('new_user', function(data){
+    console.log(data);
+  });*/
   console.log('User Connected');
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
