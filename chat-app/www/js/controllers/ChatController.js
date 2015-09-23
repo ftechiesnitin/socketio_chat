@@ -1,4 +1,4 @@
-var chat=app.controller('ChatController',function($stateParams,socket,$sanitize,$ionicScrollDelegate,$timeout) {
+var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sanitize,$ionicScrollDelegate,$timeout) {
   	
   	var self=this;
   	var typing = false;
@@ -13,9 +13,9 @@ var chat=app.controller('ChatController',function($stateParams,socket,$sanitize,
 	  ];
 
 	 //initializing messages array
-	self.messages=[]
+	self.messages = []
 
-  	socket.on('connect',function(){
+  	/*socket.on('connect',function(){
   		// /socket.emit('new_user', {username: $stateParams.nickname});
   		connected = true
   	 	console.log('connected');
@@ -57,20 +57,21 @@ var chat=app.controller('ChatController',function($stateParams,socket,$sanitize,
 	  	socket.on('stop typing', function (data) {
 	    	removeChatTyping(data.username);
 	  	});	
-  	})
+  	})*/
 
   	//function called when user hits the send button
-  	self.sendMessage=function(){
-  		socket.emit('new message', self.message)
+  	$scope.sendMessage=function(){
+  		console.log(this.message);
+  		socket.emit('new message/:'+$stateParams.nickname, self.message)
   		addMessageToList($stateParams.nickname,true,self.message)
-  		socket.emit('stop typing');
-  		self.message = ""
+  		/*socket.emit('stop typing');
+  		self.message = ""*/
   	}
 
   	//function called on Input Change
-  	self.updateTyping=function(){
-  		sendUpdateTyping()
-  	}
+  	// self.updateTyping=function(){
+  	// 	sendUpdateTyping()
+  	// }
 
   	// Display message by adding it to the message list
   	function addMessageToList(username,style_type,message){
@@ -94,23 +95,23 @@ var chat=app.controller('ChatController',function($stateParams,socket,$sanitize,
   	}
 
   	// Updates the typing event
-  	function sendUpdateTyping(){
-  		if(connected){
-  			if (!typing) {
-		        typing = true;
-		        socket.emit('typing');
-		    }
-  		}
-  		lastTypingTime = (new Date()).getTime();
-  		$timeout(function () {
-	        var typingTimer = (new Date()).getTime();
-	        var timeDiff = typingTimer - lastTypingTime;
-	        if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
-	          socket.emit('stop typing');
-	          typing = false;
-	        }
-      	}, TYPING_TIMER_LENGTH)
-  	}
+  	// function sendUpdateTyping(){
+  	// 	if(connected){
+  	// 		if (!typing) {
+		 //        typing = true;
+		 //        socket.emit('typing');
+		 //    }
+  	// 	}
+  	// 	lastTypingTime = (new Date()).getTime();
+  	// 	$timeout(function () {
+	  //       var typingTimer = (new Date()).getTime();
+	  //       var timeDiff = typingTimer - lastTypingTime;
+	  //       if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
+	  //         socket.emit('stop typing');
+	  //         typing = false;
+	  //       }
+   //    	}, TYPING_TIMER_LENGTH)
+  	// }
 
 	// Adds the visual chat typing message
 	function addChatTyping (data) {

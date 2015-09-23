@@ -8,7 +8,7 @@
          <ion-content has-bouncing="true" class="content">
           <div ng-show="chatCtrl.connected">
              <div class="log pad2">"Welcome to Socket.IO Chat – ";</div>
-             <div class="log">{{chatCtrl.number_message}}</div>
+             <!-- <div class="log">{{chatCtrl.number_message}}</div> -->
           </div>
           <div>
             <ul>
@@ -21,7 +21,7 @@
         <div class="list light-grey bottommsg">
             <div class="item item-input-inset light-grey">
               <label  class="item-input-wrapper line-light-grey nopadtop">
-                <input class="line-light-grey" ng-change="chatCtrl.updateTyping()" type="text"  placeholder="Message" ng-enter="chatCtrl.sendMessage()" ng-model="chatCtrl.message"> 
+                <input class="line-light-grey" ng-change="chatCtrl.updateTyping()" type="text"  placeholder="Message" ng-enter="sendMessage()" ng-model="message"> 
               </label>
               <div class="divsend">
                     <button class="button button-clear ion-android-send iconsend" ng-click="chatCtrl.sendMessage()"></button>
