@@ -68,10 +68,9 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 
   	//function called when user hits the send button
   	$scope.sendMessage=function(){
-  		console.log(this.message);
   		var data ={
   			message: this.message,
-  			username: $stateParams.nickname
+  			username: $stateParams.username
   		}
   		socket.emit('new message', data)
   		addMessageToList($stateParams.username,true,this.message)
@@ -86,9 +85,7 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 
   	// Display message by adding it to the message list
   	function addMessageToList(username,style_type,message){
-  		console.log(username);
-  		console.log(style_type);
-  		console.log(message);
+  		console.log(username)
   		username = $sanitize(username)
   		removeChatTyping(username)
   		var color = style_type ? getUsernameColor(username) : null
