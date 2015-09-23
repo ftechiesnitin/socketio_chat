@@ -1,7 +1,15 @@
 <ion-view view-title="Socket.IO Chat Demo" ng-controller="UserlistController" class="light-grey">
-	<div class="card" ng-repeat="username in usernames">
-	  <div class="item item-text-wrap" ng-click="gotoChat(username)">
-	    {{username}}
-	  </div>
-	</div>
+	<ion-nav-bar class="bar-dark">
+	  <ion-nav-buttons side="right">
+	    <button class="button button-clear icon ion-android-more-vertical right8" ng-click="chatCtrl.openPopover($event)">
+	    </button>
+	  </ion-nav-buttons>
+	</ion-nav-bar>
+	<ion-content has-bouncing="true" class="content">
+		<div class="card" ng-repeat="username in usernames">
+		  <div class="item item-text-wrap" ng-click="gotoChat(username)">
+		    {{username}}
+		  </div>
+		</div>
+	</ion-content>
 </ion-view>

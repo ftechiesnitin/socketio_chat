@@ -74,7 +74,7 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
   			username: $stateParams.nickname
   		}
   		socket.emit('new message', data)
-  		addMessageToList($stateParams.username,true,self.message)
+  		addMessageToList($stateParams.username,true,this.message)
   		/*socket.emit('stop typing');
   		self.message = ""*/
   	}
@@ -86,6 +86,9 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 
   	// Display message by adding it to the message list
   	function addMessageToList(username,style_type,message){
+  		console.log(username);
+  		console.log(style_type);
+  		console.log(message);
   		username = $sanitize(username)
   		removeChatTyping(username)
   		var color = style_type ? getUsernameColor(username) : null

@@ -1,9 +1,8 @@
  <ion-view view-title="Socket.IO Chat Demo" ng-controller="ChatController as chatCtrl" class="light-grey">
          <ion-nav-bar class="bar-dark">
-          <ion-nav-buttons side="right">
-            <button class="button button-clear icon ion-android-more-vertical right8" ng-click="chatCtrl.openPopover($event)">
-            </button>
-          </ion-nav-buttons>
+          <ion-nav-back-button class="button-clear">
+            <i class="ion-arrow-left-c"></i> Back
+          </ion-nav-back-button>
          </ion-nav-bar>
          <ion-content has-bouncing="true" class="content">
           <div ng-show="chatCtrl.connected">
