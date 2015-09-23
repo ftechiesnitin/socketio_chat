@@ -15,50 +15,56 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 	 //initializing messages array
 	self.messages = []
 
-  	socket.on('connect',function(){
-  		/*// /socket.emit('new_user', {username: $stateParams.nickname});
-  		connected = true
-  	 	console.log('connected');
-  		//Add user
-  		socket.emit('add user', $stateParams.nickname);
+	socket.on('private'+$stateParams.username, function (data) {
+  		console.log(data);
+  		if(data.message&&data.username){
+   			addMessageToList(data.username,true,data.message)
+   		}
+  	});
+//   	socket.on('connect',function(){
+//   		/*// /socket.emit('new_user', {username: $stateParams.nickname});
+//   		connected = true
+//   	 	console.log('connected');
+//   		//Add user
+//   		socket.emit('add user', $stateParams.nickname);
 
-  	  	// On login display welcome message
-  	  	socket.on('login', function (data) {
-	    	//Set the value of connected flag
-	    	self.connected = true
-	    	self.number_message= message_string(data.numUsers)
-	  	});
-*/
-	  	// Whenever the server emits 'new message', update the chat body
-	  	socket.on('private'+$stateParams.username, function (data) {
-	  		console.log(data);
-	  		/*if(data.message&&data.username){
-	   			addMessageToList(data.username,true,data.message)
-	   		}*/
-	  	});
+//   	  	// On login display welcome message
+//   	  	socket.on('login', function (data) {
+// 	    	//Set the value of connected flag
+// 	    	self.connected = true
+// 	    	self.number_message= message_string(data.numUsers)
+// 	  	});
+// */
+// 	  	// Whenever the server emits 'new message', update the chat body
+// 	  	socket.on('private'+$stateParams.username, function (data) {
+// 	  		console.log(data);
+// 	  		/*if(data.message&&data.username){
+// 	   			addMessageToList(data.username,true,data.message)
+// 	   		}*/
+// 	  	});
 
-		// Whenever the server emits 'user joined', log it in the chat body
-		/*socket.on('user joined', function (data) {
-			addMessageToList("",false,data.username + " joined")
-	  		addMessageToList("",false,message_string(data.numUsers)) 
-	  	});
+// 		// Whenever the server emits 'user joined', log it in the chat body
+// 		/*socket.on('user joined', function (data) {
+// 			addMessageToList("",false,data.username + " joined")
+// 	  		addMessageToList("",false,message_string(data.numUsers)) 
+// 	  	});
 
-	  	// Whenever the server emits 'user left', log it in the chat body
-	  	socket.on('user left', function (data) {
-	    	addMessageToList("",false,data.username+" left")
-	    	addMessageToList("",false,message_string(data.numUsers))
-	  	});
+// 	  	// Whenever the server emits 'user left', log it in the chat body
+// 	  	socket.on('user left', function (data) {
+// 	    	addMessageToList("",false,data.username+" left")
+// 	    	addMessageToList("",false,message_string(data.numUsers))
+// 	  	});
 
-	  	//Whenever the server emits 'typing', show the typing message
-	  	socket.on('typing', function (data) {
-	    	addChatTyping(data);
-	  	});
+// 	  	//Whenever the server emits 'typing', show the typing message
+// 	  	socket.on('typing', function (data) {
+// 	    	addChatTyping(data);
+// 	  	});
 
-	  	// Whenever the server emits 'stop typing', kill the typing message
-	  	socket.on('stop typing', function (data) {
-	    	removeChatTyping(data.username);
-	  	});	*/
-  	})
+// 	  	// Whenever the server emits 'stop typing', kill the typing message
+// 	  	socket.on('stop typing', function (data) {
+// 	    	removeChatTyping(data.username);
+// 	  	});	*/
+//   	})
 
   	//function called when user hits the send button
   	$scope.sendMessage=function(){
@@ -68,7 +74,7 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
   			username: $stateParams.nickname
   		}
   		socket.emit('new message', data)
-  		addMessageToList($stateParams.nickname,true,self.message)
+  		addMessageToList($stateParams.username,true,self.message)
   		/*socket.emit('stop typing');
   		self.message = ""*/
   	}
