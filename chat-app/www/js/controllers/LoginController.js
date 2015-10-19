@@ -4,9 +4,16 @@
         {
             //sanitize the nickname
             var nickname=$sanitize(self.nickname)
-            if(nickname)
-            {
-                $state.go('user_list',{username:nickname})
+            if(nickname == 'admin'){
+                if(nickname)
+                {
+                    $state.go('user_list',{username:nickname})
+                }
+            }else{
+                if(nickname)
+                {
+                    $state.go('chat',{username: $stateParams.username, nickname: 'admin'})
+                }
             }
         }
     });
