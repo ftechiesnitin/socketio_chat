@@ -37,8 +37,6 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 		if(data.message&&data.username){
  			addMessageToList(data.username,true,data.message)
  		}
-    var input = document.getElementById("message");
-    input.value = '';
 	});
 //   	socket.on('connect',function(){
 //   		/*// /socket.emit('new_user', {username: $stateParams.nickname});
@@ -93,7 +91,8 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
   			username: $stateParams.username
   		}
   		socket.emit('new message', data)
-  		addMessageToList($stateParams.username,true,this.message)
+  		addMessageToList($stateParams.username,true,this.message);
+      document.getElementById("message").value = "";
   		/*socket.emit('stop typing');
   		self.message = ""*/
   	}
