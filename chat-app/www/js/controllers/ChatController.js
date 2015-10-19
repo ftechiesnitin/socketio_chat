@@ -37,6 +37,8 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 		if(data.message&&data.username){
  			addMessageToList(data.username,true,data.message)
  		}
+    var input = document.getElementById("message");
+    input.value = '';
 	});
 //   	socket.on('connect',function(){
 //   		/*// /socket.emit('new_user', {username: $stateParams.nickname});

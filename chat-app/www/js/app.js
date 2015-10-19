@@ -24,6 +24,7 @@
         templateUrl: "templates/chat.html"
       })
       .state('user_list', {
+        cache: false,
         url: "/user_list/:username",
         templateUrl: "templates/user_list.html"
       })
