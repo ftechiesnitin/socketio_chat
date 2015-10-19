@@ -14,13 +14,30 @@ var chat=app.controller('ChatController',function($scope,$stateParams,socket,$sa
 
 	 //initializing messages array
 	self.messages = []
-
+  if($stateParams.username != 'admin'){
+    //Add user
+    socket.emit('add user', $stateParams.username);
+    // On login display welcome message
+      socket.on('login', function (data) {
+        console.log('htl');
+      //Set the value of connected flag
+      self.connected = true
+      //self.number_message = message_string(data.numUsers)
+    });
+    // Whenever the server emits 'user joined', log it in the chat body
+    socket.on('user joined', function (data) {
+      console.log(data);
+      console.log('asdadasd');
+      $scope.usernames = data.usernames;
+      //addMessageToList("",false,message_string(data.numUsers)) 
+    });
+  }
 	socket.on('private'+$stateParams.username, function (data) {
-  		console.log(data);
-  		if(data.message&&data.username){
-   			addMessageToList(data.username,true,data.message)
-   		}
-  	});
+		console.log(data);
+		if(data.message&&data.username){
+ 			addMessageToList(data.username,true,data.message)
+ 		}
+	});
 //   	socket.on('connect',function(){
 //   		/*// /socket.emit('new_user', {username: $stateParams.nickname});
 //   		connected = true
