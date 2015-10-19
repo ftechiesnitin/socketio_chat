@@ -12,7 +12,7 @@
             }else{
                 if(nickname)
                 {
-                    $state.go('chat',{username: $stateParams.username, nickname: 'admin'})
+                    $state.go('chat',{username: nickname, nickname: 'admin'})
                 }
             }
         }
